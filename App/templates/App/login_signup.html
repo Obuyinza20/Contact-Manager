@@ -1,0 +1,87 @@
+{% extends 'App/main.html' %}  
+
+
+<body>
+
+    {% block content %}  
+
+
+
+
+    {% if page == 'login' %}  
+
+
+
+    <div class=" container" style="min-height: 50vh;margin-top: 10%;">
+        
+    <div class="header">
+        <h3>Login</h3>
+        </div>
+        <div class="form-container"  style="display: flex;
+        justify-content: space-evenly;
+        padding: 2em 0;
+        align-items: center;">
+        <form action="" method="POST">
+            {% csrf_token %} 
+
+           {% if messages %} 
+           
+           {% for message in messages %} 
+
+           {% if tags %} 
+           <p class="{{message.tags}}">{{message}}</p>
+
+           {% endif %}
+
+           {% endfor %}
+
+           {% endif %}
+           <div>
+            <label for="username">UserName</label>
+            <input type="text" name="username" id="">
+            </div><br>
+            <div>
+            <label for="password">_Password</label>
+            <input type="password" name="password" id="">
+            </div><br>
+
+            <input type="submit" name="submit" value="Login" style="color:green; font-weight: bolder;">
+            <div>
+                <p>Haven't signed up yet?</p><a href="{% url 'signup' %}" style="color:rgba(0,212,255,1)">signUp here</a>
+            </div>
+            
+        </form>
+
+    </div>
+
+    {% else %}  
+
+    <div class=" container">
+        <div class="header">
+            <h3>SignUp</h3>
+        </div>
+        <div class="form-container"  style="display: flex;
+            justify-content: space-evenly;
+            padding: 2em 0;
+            align-items: center;">
+
+
+        <form action="" method="POST">
+            {% csrf_token %} 
+
+            {{form.as_p}}
+            <input type="submit" name="submit" value="SignUp" style="color:green; font-weight: bolder;">
+        </form>
+        <div style="background:rgb(3, 51, 3); border-radius: 8px;padding: 3px; text-align: center;">
+            <p>Already signed up?</p><a href="{% url 'login' %}" style="color:rgba(0,212,255,1)">logIn here</a>
+        </div>
+    </div>
+
+    </div>
+
+    {% endif %}
+
+
+    {% endblock content %}
+    
+</body>

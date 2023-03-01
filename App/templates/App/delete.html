@@ -1,0 +1,47 @@
+{% extends 'App/main.html' %}  
+
+
+
+<body>
+    {% block content %} 
+
+<div class="container">
+    
+    <div class="hero">
+        <header>
+            <div class="back"> 
+                <a href="{{request.META.HTTP_REFERER}}"><i class="fa-sharp fa-solid fa-angle-left back-btn"></i><h4>Go Back</h4></a>
+              
+            </div>
+           
+             <div class="hero-info">
+                <h1 class="name">{{contact.full_name |title}}</h1>
+                <p class="relationship">{{contact.relationship |title}}</p>
+             </div> 
+
+    </div>
+    <br><br>
+    <div class="warning">
+        <h1><i class="fa-sharp fa-solid fa-question"></i></h1>
+
+        <h3>Are you sure you want to delete this contact</h3>
+
+    </div>
+    <br><br>
+    <div class="save-delete">
+    </form>
+    <form action="" method="POST">
+     {% csrf_token %}
+    <div class="deleteMe">
+     <i class="fa-solid fa-trash delete-gradient"></i>
+     <input type="submit" value="Delete">
+    </div>
+    </form>
+        
+    </div>
+</div>
+
+
+
+    {% endblock content %}
+</body>

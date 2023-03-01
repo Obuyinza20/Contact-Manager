@@ -1,0 +1,145 @@
+{% extends 'App/main.html' %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+             p{
+                margin: 0;
+                padding-left: 2em;
+            }
+            
+        </style>
+    </head>
+    <body>
+
+        {% block content %}
+        {% if page == 'create' %} 
+         
+            <div class="container">
+                <header class="hero">
+                    <a href="{% url 'home' %}"><i class="fa-sharp fa-solid fa-angle-left back-btn"></i></a>
+                     <!-- <div class="hero-info"> -->
+                        <h2 class="name">Add New Contact</h2>
+                     
+                </header>
+
+                <section class="contact-info"> 
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                    
+                    
+                    <div class="info-line">
+                     
+                        <i class="fa-sharp fa-solid fa-book icon-gradient"></i>
+                        
+                        <input type="text" class = "type" name="full_name" placeholder="Full Name">
+                    </div>
+                    
+                    <div class="info-line">
+                        
+                        <i class="fa-solid fa-phone-flip icon-gradient"></i>
+                        <input type="text" class = "type" name="phone_number" placeholder="Phone Number">
+                    </div>
+                    <div class="info-line">
+                        
+                        <i class="fa-sharp fa-solid fa-comment-sms icon-gradient"></i>
+                        <input type="email" class = "type" name="email" placeholder="Email">
+                    </div>
+                    <div class="info-line">
+                        
+                        <i class="fa-solid fa-envelope icon-gradient" ></i>
+                        <input type="text" class = "type" name="address" placeholder="Address">
+                    </div>
+                    <div class="info-line">
+                        <i class="fa-solid fa-user icon-gradient"></i>
+                        <input type="text" class = "type" name="relationship" placeholder="Relationship">
+                    </div> 
+                </section>
+    
+                
+                    <section class="edit-contact">
+                        <div class="save-create">
+                          
+                           <div class="saveMe" style="text-align: center;">
+                           
+                           
+                            <i class="fa-solid fa-check save-gradient"></i>
+                            <input type="submit" value="Save">
+                          
+                       
+    
+                    </form>
+                    </section>
+                </a>
+            </div>
+            
+    
+            {% else %} 
+    
+            <div class="container"> 
+                <header class="hero">
+                    <a href="{{request.META.HTTP_REFERER}}"><i class="fa-sharp fa-solid fa-angle-left back-btn"></i></a>
+                     <div class="hero-info">
+                        <h1 class="name">{{contact.full_name |title}}</h1>
+                        <p class="relationship">{{contact.relationship |title}}</p>
+                     </div>
+                </header>
+                <form action="" method="post">
+                    {% csrf_token %}
+                
+                <section class="contact-info">
+                    <div class="info-line">
+                        
+                        <i class="fa-solid fa-phone-flip icon-gradient"></i>
+                        <input type="text" class = "type" name="full_name" value="{{contact.full_name}}">
+                    </div>
+                    <div class="info-line">
+                        
+                        <i class="fa-solid fa-phone-flip icon-gradient"></i>
+                        <input type="text" class = "type" name="phone_number" value="{{contact.phone}}">
+                    </div>
+                    <div class="info-line">
+                        
+                        <i class="fa-sharp fa-solid fa-comment-sms icon-gradient"></i>
+                        <input type="email" class = "type" name="email" value="{{contact.email}}">
+                    </div>
+                    <div class="info-line">
+                        
+                        <i class="fa-solid fa-envelope icon-gradient" ></i>
+                        <input type="text" class = "type" name="address" value="{{contact.address}}">
+                    </div>
+                    <div class="info-line">
+                        <i class="fa-solid fa-user icon-gradient"></i>
+                        <input type="text" class = "type" name="relationship" value="{{contact.relationship}}">
+                    </div>
+                </section>
+    
+                <a href="{% url 'update' contact.id %}">
+                    <section class="edit-contact">
+                        <div class="save-delete">
+                           
+                           <div class="saveMe">
+                            <i class="fa-solid fa-check save-gradient"></i>
+                            <input type="submit" value="Save">
+                           </div>
+                        
+                           <a   href="{% url 'delete' contact.id %}">
+                            {% csrf_token %}
+                           <div class="deleteMe">
+                            <i class="fa-solid fa-trash delete-gradient"></i>
+                            <p style="margin-left: 10px;color: brown;font-weight: bolder;">Delete</p>
+                        </div>
+                        </a>
+                           
+                   
+                        </div>
+                    </section>
+                </a>
+            </form>
+            </div>
+            {% endif %}
+
+        {% endblock content %}
+    </body>
+</html>

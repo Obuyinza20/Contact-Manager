@@ -1,0 +1,63 @@
+{% extends 'App/main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  
+    <head>
+       
+    
+      
+    </head>
+   
+    <body>
+        {% block content %}
+        <div class="container">
+            <header class="header" style="display:block">
+                <div style="display:flex; justify-content: space-evenly;">
+                    {% if request.user.is_authenticated %} 
+                    <h3>@{{request.user.username}}</h3>
+                    <a style="color:gold" href="{% url 'logout' %}">Logout</a>
+                    {% else %} 
+                    <a href="{% url 'login' %}">Login</a> 
+                    {% endif %}
+                </div>
+                <div style="display:flex; text-align:center; margin-left: 20%;" >
+                    <form class=" search-bar" method="get" action="">
+                        <input type="text"  class=" contact-search" name="search-area" placeholder="Search...." value = " {{search_input}}"/>
+                    </form>
+                    <a style="padding:5px" href="{% url 'create' %}"><i class="fa-solid fa-circle-plus add"></i><span style="padding-top:6px">add</span></a>
+    
+                </div>
+                
+                
+            </header>
+            <section class="contacts-library">
+               <ul class="contact-list">
+                {% for contact in contacts reversed %}
+
+                {% if request.user.username == contact.owner %}
+                <a href="{% url 'profile' contact.id %}"><div class="contact-section">
+                    <li class="list-item">
+                        <p class="contact-name"> {{contact.full_name | title}}</p>
+                        <p class=" relationship"> {{contact.relationship|title}}</p>
+                    </li>
+                    <li  class="list-item">
+                        <i class="fa-solid fa-phone-flip"></i>
+                        <i class="fa-sharp fa-solid fa-comment-sms text"></i>
+                    </li>
+                </div>
+            </a>
+                <hr>
+                
+                {% endif %}
+                {% empty %} 
+
+                <h3 style="margin-left: 20%">Oops! No contact found!</h3>
+                {% endfor %}
+          
+               </ul>
+            </section>
+        </div>
+        {% endblock content %}
+    </body>
+</html>

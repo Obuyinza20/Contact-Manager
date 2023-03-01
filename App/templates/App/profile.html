@@ -1,0 +1,61 @@
+{% extends 'App/main.html' %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        {% block content %} 
+
+        <div class="container"> 
+            <header class="hero">
+                <a href="{% url 'home' %}"><i class="fa-sharp fa-solid fa-angle-left back-btn"></i></a>
+                 <div class="hero-info">
+                    <h1 class="name">{{contact.full_name |title}}</h1>
+                    <p class="relationship">{{contact.relationship |title}}</p>
+                 </div>
+            </header>
+
+          
+            <section class="contact-info">
+                <div class="info-line">
+                    
+                    <i class="fa-solid fa-phone-flip icon-gradient"></i>
+                    <p class="phone-number">{{contact.phone}}</p>
+                </div>
+                <div class="info-line">
+                    
+                    <i class="fa-sharp fa-solid fa-comment-sms icon-gradient"></i>
+                    <p class="sms">Send {{contact.full_name}} a Message</p>
+                </div>
+                <div class="info-line">
+                    
+                    <i class="fa-solid fa-envelope icon-gradient" ></i>
+                    <p class="email">{{contact.email}}</p>
+                </div>
+                <div class="info-line">
+                    
+                    <i id="location" class="fa-solid fa-location-dot icon-gradient"></i>
+                    <p class="address">{{contact.address}}</p>
+                </div>
+            </section>
+
+            <a href="{% url 'update' contact.id %}">
+                <section class="edit-contact">
+                    <div class="edit-">
+
+                        <i class="fa-sharp fa-solid fa-gear icon-gradient"></i>
+               
+                    </div>
+                </section>
+            </a>
+        </div>
+
+
+
+        {% endblock content %}
+        
+    </body>
+</html>
